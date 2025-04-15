@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArbitrationStation | Space-Age Dispute Resolution</title>
+    <!-- Modern font integration -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --accent-color: #00cec9;
+            --dark-bg: #0c0e18;
+            --light-text: #f5f6fa;
+            --card-bg: rgba(44, 47, 72, 0.8);
+            --grid-lines: rgba(108, 92, 231, 0.2);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            margin: 0;
+            padding: 0;
+            background-image: 
+                linear-gradient(var(--grid-lines) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px);
+            background-size: 40px 40px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header implementation */
+        header {
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+            background-color: rgba(0, 206, 201, 0.1);
+        }
+        
+        /* Hero section implementation */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Floating elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(10px);
+        }
+        
+        /* Feature cards implementation */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+        
+        .card p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        /* Podcast section implementation */
+        .podcast {
+            padding: 80px 0;
+            background-color: rgba(12, 14, 24, 0.8);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .transcript {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            max-height: 400px;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .transcript h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        
+        /* Footer implementation */
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive implementation */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-nav ul {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating elements for space theme -->
+    <div class="floating-elements">
+        <!-- JS will add these elements dynamically -->
+    </div>
+
+    <!-- Header implementation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-icon">🛰️</span> ArbitrationStation
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#podcast">Podcast</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero section implementation -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Dispute Resolution for the AI Age</h1>
+            <p>Explore the interstellar world of international commercial arbitration with our Gen Z-friendly approach. Navigate complex legal frameworks with our cosmic guides Dr. Zhou and Algorithm Girl.</p>
+            <a href="#podcast" class="cta-button">Launch Podcast 🚀</a>
+        </div>
+    </section>
+
+    <!-- Features section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Cosmic Legal Framework</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Arbitration Basics</h3>
+                    <p>Discover the fundamentals of international commercial arbitration - the private dispute resolution system that powers global commerce across galaxies.</p>
+                </div>
+                <div class="card">
+                    <h3>Legal Instruments</h3>
+                    <p>Navigate the New York Convention and UNCITRAL Model Law - the universal translators of international arbitration that maintain order across jurisdictions.</p>
+                </div>
+                <div class="card">
+                    <h3>Australian Implementation</h3>
+                    <p>Explore how Australia has adapted international arbitration frameworks into its legal system, creating a harmonized approach to dispute resolution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Podcast section implementation -->
+    <section class="podcast" id="podcast">
+        <div class="container">
+            <h2 class="section-title">Podcast Transmission</h2>
+            <div class="video-container">
+                <!-- YouTube embed placeholder - replace with your actual video ID -->
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="ArbitrationStation Podcast" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="transcript">
+                <h3>Episode Transcript</h3>
+                <p>Welcome to international commercial arbitration podcast. I am Dr. Zhou Wenqi - (周文琦). Today we will break down key concepts of arbitration - how companies from different countries solve business disputes without Courts.</p>
+                
+                <p>Hello everyone! I'm Algorithm Girl. Think of me as your study partner! I'll ask Dr. Zhou questions you might have in mind, especially if you're an international student encountering these concepts for the first time. My job is to make sure everything stays clear and practical for your studies.</p>
+                
+                <!-- Add more of your transcript here -->
+                <p>Let us begin with basic question: What is Arbitration? Arbitration (仲裁 - zhòng cái) is private way to solve disputes without going to court. It has two main features: first, it happens in private, and second, it gives final decision that must be followed.</p>
+                
+                <p>So Arbitration is like hiring a private judge instead of using the public court system?</p>
+                
+                <p>Precisely. This is excellent comparison framework. Parties select neutral decision-maker called arbitrator who acts similar to judge but in private setting.</p>
+                
+                <!-- Continue with rest of transcript... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer implementation -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>🛰️</span> ArbitrationStation
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-icon">📱</a>
+                    <a href="#" class="social-icon">💻</a>
+                    <a href="#" class="social-icon">📧</a>
+                    <a href="#" class="social-icon">🔊</a>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#podcast">Podcast</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ArbitrationStation | A learning project by Wong Ming Ming | Middleware Consciousness Research Division
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript implementation -->
+    <script>
+        // Create floating elements for space theme
+        function createFloatingElements() {
+            const floatingContainer = document.querySelector('.floating-elements');
+            const colors = ['#6c5ce7', '#00cec9', '#74b9ff', '#a29bfe'];
+            
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                
+                // Random size between 20px and 100px
+                const size = Math.random() * 80 + 20;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                
+                // Random position
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.left = `${Math.random() * 100}%`;
+                
+                // Random color
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                element.style.backgroundColor = color;
+                
+                // Random animation
+                const duration = Math.random() * 20 + 10;
+                element.style.animation = `float ${duration}s infinite ease-in-out`;
+                
+                floatingContainer.appendChild(element);
+            }
+        }
+        
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingElements();
+        });
+    </script>
+</body>
+</html>
